@@ -1,0 +1,16 @@
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\WindowsGame6.exe
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\WindowsGame6.pdb
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\obj\x86\Debug\WindowsGame6.csprojResolveAssemblyReference.cache
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\obj\x86\Debug\WindowsGame6.exe
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\obj\x86\Debug\WindowsGame6.pdb
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\Content\Menu\MenuBackGround.xnb
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\Content\Menu\menuSmall.xnb
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\Content\Menu\menuLarge.xnb
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\Content\Help\Help_1.xnb
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\Content\Help\Help_8.xnb
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\Content\Help\HelpBackGround.xnb
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\Content\Help\Help23.xnb
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\Content\Help\Help67.xnb
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\Content\Help\Help45.xnb
+D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6\bin\x86\Debug\Content\Help\HelpGround.xnb
