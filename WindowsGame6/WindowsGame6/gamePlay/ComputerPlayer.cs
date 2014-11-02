@@ -11,6 +11,7 @@ namespace WindowsGame6.gamePlay
         protected Character character;
         protected List<Building> constructedВuildings;
         protected CardsViewer constructedВuildingsViewer;
+        protected int money = 0;
         protected MouseState oldMouseState;
         protected PanelButton panelButton;
 
@@ -45,14 +46,19 @@ namespace WindowsGame6.gamePlay
         }
 
         public bool Active { get; set; }
-        public int Money { get; set; }
+
+        public int Money
+        {
+            get { return money; }
+            set { money = value; }
+        }
 
         public void SetCharacter(Character newCharacter)
         {
             character = newCharacter;
         }
 
-        public void ConstructBuilding(Building build) //заменить на protected
+        public void ConstructBuilding(Building build) //TODO заменить на protected
         {
             constructedВuildings.Add(build);
             cardsOnHands.Remove(build);
