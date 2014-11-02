@@ -327,47 +327,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Action\panelButton.png">
-      <Name>panelButton</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Action\panelButtonBlue.png">
-      <Name>panelButtonBlue</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Action\panelButtonGreen.png">
-      <Name>panelButtonGreen</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Action\panelButtonMoney.png">
-      <Name>panelButtonMoney</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Action\panelButtonRed.png">
-      <Name>panelButtonRed</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Action\panelButtonYellow.png">
-      <Name>panelButtonYellow</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Action\panel.png">
       <Name>panel</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Action\panelButtonBuildings.png">
-      <Name>panelButtonBuildings</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -387,15 +348,89 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Action\panelButtonViolet.png">
-      <Name>panelButtonViolet</Name>
+    <Compile Include="Buildings\shirt.png">
+      <Name>shirt</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buildings\shirt.png">
+    <Compile Include="Character\shirt.png">
       <Name>shirt</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Action\panelButtonBlue.png">
+      <Name>panelButtonBlue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonBlue1.png">
+      <Name>panelButtonBlue1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonBlue2.png">
+      <Name>panelButtonBlue2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonBlue3.png">
+      <Name>panelButtonBlue3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonBuildings.png">
+      <Name>panelButtonBuildings</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonGreen.png">
+      <Name>panelButtonGreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonGreen1.png">
+      <Name>panelButtonGreen1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonMoney.png">
+      <Name>panelButtonMoney</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonRed.png">
+      <Name>panelButtonRed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonRed2.png">
+      <Name>panelButtonRed2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonViolet.png">
+      <Name>panelButtonViolet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonViolet1.png">
+      <Name>panelButtonViolet1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Action\panelButtonYellow.png">
+      <Name>panelButtonYellow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Action\panelButtonYellow1.png">
+      <Name>panelButtonYellow1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

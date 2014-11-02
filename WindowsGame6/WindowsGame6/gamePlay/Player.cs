@@ -1,13 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using WindowsGame6.core;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace WindowsGame6.gamePlay
 {
-    internal class Player
+    public class Player : ComputerPlayer
     {
-        private bool active;
-        private List<BuildingCard> buildings;
-        private List<BuildingCard> cardsOnHands;
-        private CharacterCard character;
-        private int money;
+        private readonly CardsViewer cardsOnHandsViewer;
+
+
+        public Player(Game game, string name, PanelButton panel) : base(game, name, panel)
+        {
+            cardsOnHandsViewer = new CardsViewer(game);
+           Components.Add(cardsOnHandsViewer);
+        }
+
+
+    
+        public void ShowCardsOnHands()
+        {
+            cardsOnHandsViewer.Show();
+        }
+
+   
+
+        public void HideCardsOnHands()
+        {
+            cardsOnHandsViewer.Hide();
+        }
     }
 }

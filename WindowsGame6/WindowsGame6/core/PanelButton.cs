@@ -5,9 +5,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WindowsGame6.core
 {
-    /// <summary>
-    ///     This is a game component that implements IUpdateable.
-    /// </summary>
     public class PanelButton : DrawableGameComponent
     {
         private readonly List<Button> buttons;
@@ -18,17 +15,19 @@ namespace WindowsGame6.core
         private int panelHeight;
         private int panelWidth;
         private Vector2 position;
+        private Button viewСonstructedBuildings;
 
 
         public PanelButton(Game game, Texture2D panelTexture, SpriteFont font)
             : base(game)
         {
             spriteBatch = (SpriteBatch) Game.Services.GetService(typeof (SpriteBatch));
-
             spriteFont = font;
             panel = panelTexture;
             buttons = new List<Button>();
             oldMouseState = Mouse.GetState();
+            Visible = true;
+            Enabled = true;
         }
 
         public Vector2 Position
@@ -37,18 +36,29 @@ namespace WindowsGame6.core
             set { position = value; }
         }
 
-        public void SetParams(int width, int height, List<Texture2D> btnTextures)
+        public int Width
+        {
+            get { return panelWidth; }
+        }
+
+        public int Height
+        {
+            get { return panelHeight; }
+        }
+
+        public virtual void SetParams(int width, int height, List<Texture2D> btnTextures)
         {
             panelWidth = width;
             panelHeight = height;
+
             int btnSize;
             if (width/btnTextures.Count >= height)
             {
-                btnSize = (height - height/2);
+                btnSize = (height/2);
             }
             else
             {
-                btnSize = (width - width/2)/btnTextures.Count;
+                btnSize = (width/2)/btnTextures.Count;
             }
             buttons.Clear();
             foreach (Texture2D btnTexture in btnTextures)
@@ -57,6 +67,7 @@ namespace WindowsGame6.core
                 button.Height = button.Width = btnSize;
                 buttons.Add(button);
             }
+            viewСonstructedBuildings = buttons[buttons.Count - 1];
         }
 
         public bool IsBuildingsButtonClick(Vector2 vector)
@@ -106,11 +117,11 @@ namespace WindowsGame6.core
                 Button button = buttons[i];
                 switch (i)
                 {
-                    case 5:
+                    case 4:
                         button.TextPosition.Y += button.Height/6;
                         button.Draw(spriteBatch, Button.DrawMode.Text, spriteFont);
                         break;
-                    case 6:
+                    case 5:
                         button.Draw(spriteBatch, Button.DrawMode.Default, spriteFont);
                         break;
                     default:

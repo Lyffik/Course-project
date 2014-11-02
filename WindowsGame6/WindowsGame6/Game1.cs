@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using WindowsGame6.core;
 using WindowsGame6.gamePlay;
+using WindowsGame6.gamePlay.Characters;
+using WindowsGame6.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -57,6 +59,8 @@ namespace WindowsGame6
             spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
             Services.AddService(typeof (SpriteBatch), spriteBatch);
 
+            #region Load Scene of Help
+
             var helpList = new List<Texture2D>();
             helpList.Add(Content.Load<Texture2D>("Help/Help_1"));
             helpList.Add(Content.Load<Texture2D>("Help/Help23"));
@@ -67,43 +71,98 @@ namespace WindowsGame6
             helpScene = new HelpScene(this, helpBackgroundTexture, helpList);
             Components.Add(helpScene);
 
-            actionBackgroundTexture = Content.Load<Texture2D>("Action/GameTable2");
-            var playersList = new List<Texture2D>();
-            playersList.Add(Content.Load<Texture2D>("Character/assasin"));
-            playersList.Add(Content.Load<Texture2D>("Character/thief"));
-            playersList.Add(Content.Load<Texture2D>("Character/magician"));
-            playersList.Add(Content.Load<Texture2D>("Character/king"));
-            playersList.Add(Content.Load<Texture2D>("Character/bishop"));
-            playersList.Add(Content.Load<Texture2D>("Character/merchant"));
-            playersList.Add(Content.Load<Texture2D>("Character/architect"));
-            playersList.Add(Content.Load<Texture2D>("Character/warlord"));
-            var cardList = new List<BuildingCard>();
+            #endregion
 
-            //Load Buildings
-            string[] text = File.ReadAllLines("D:\\test.txt", Encoding.UTF8);
+            #region Load Cards Characters
+
+            var charactersCards = new List<Character>();
+            string[] text = File.ReadAllLines("Content\\Character\\Characters.txt", Encoding.UTF8);
+            for (int i = 0; i < text.Length; i++)
+            {
+                string str = text[i];
+                List<string> substrings = str.Split(',').Select(x => x.Trim()).ToList();
+                if (substrings.Count == 5)
+                {
+                    var front = Content.Load<Texture2D>(substrings[0]);
+                    var shirt = Content.Load<Texture2D>(substrings[1]);
+                    string name = Convert.ToString(substrings[2]);
+                    int rank = Convert.ToInt32(substrings[3]);
+                    Card.GameClass gameClass = Card.GetGameClass(substrings[4]);
+                    switch (i)
+                    {
+                        case 0:
+                            charactersCards.Add(new Assasin(this, front, shirt, name, rank, gameClass));
+                            break;
+                        case 1:
+                            charactersCards.Add(new Thief(this, front, shirt, name, rank, gameClass));
+                            break;
+                        case 2:
+                            charactersCards.Add(new Magician(this, front, shirt, name, rank, gameClass));
+                            break;
+                        case 3:
+                            charactersCards.Add(new King(this, front, shirt, name, rank, gameClass));
+                            break;
+                        case 4:
+                            charactersCards.Add(new Merchant(this, front, shirt, name, rank, gameClass));
+                            break;
+                        case 5:
+                            charactersCards.Add(new Bishop(this, front, shirt, name, rank, gameClass));
+                            break;
+                        case 6:
+                            charactersCards.Add(new Architect(this, front, shirt, name, rank, gameClass));
+                            break;
+                        case 7:
+                            charactersCards.Add(new WarLord(this, front, shirt, name, rank, gameClass));
+                            break;
+                    }
+                }
+            }
+
+            #endregion
+
+            #region Load Cards Buildings
+
+            var buildingsCards = new List<Building>();
+            text = File.ReadAllLines("Content\\Buildings\\BuildingsCard.txt", Encoding.UTF8);
             foreach (string s in text)
             {
-                List<string> subStrings = s.Split(',').Select(x => x.Trim()).ToList();
-                var front = Content.Load<Texture2D>(subStrings[0]);
-                var shirt = Content.Load<Texture2D>(subStrings[1]);
-                string name = Convert.ToString(subStrings[2]);
-                int cost = Convert.ToInt32(subStrings[3]);
-                cardList.Add(new BuildingCard(front, shirt, name, cost));
+                List<string> substrings = s.Split(',').Select(x => x.Trim()).ToList();
+                if (substrings.Count == 6)
+                {
+                    int count = Convert.ToInt32(substrings[0]);
+                    for (int i = 0; i < count; i++)
+                    {
+                        var front = Content.Load<Texture2D>(substrings[1]);
+                        var shirt = Content.Load<Texture2D>(substrings[2]);
+                        string name = Convert.ToString(substrings[3]);
+                        int cost = Convert.ToInt32(substrings[4]);
+                        Card.GameClass gameClass = Card.GetGameClass(substrings[5]);
+                        buildingsCards.Add(new Building(this, front, shirt, name, cost, gameClass));
+                    }
+                }
             }
+
+            #endregion
+
+            #region Load Scene of Action
+
+            actionBackgroundTexture = Content.Load<Texture2D>("Action/GameTable2");
             var buttons = new List<Texture2D>();
             var panelTexture = Content.Load<Texture2D>("Action/panel");
             buttons.Add(Content.Load<Texture2D>("Action/panelButtonRed"));
             buttons.Add(Content.Load<Texture2D>("Action/panelButtonGreen"));
-            buttons.Add(Content.Load<Texture2D>("Action/panelButtonBlue"));
-            buttons.Add(Content.Load<Texture2D>("Action/panelButtonYellow"));
-            buttons.Add(Content.Load<Texture2D>("Action/panelButtonViolet"));
+            buttons.Add(Content.Load<Texture2D>("Action/panelButtonBlue2"));
+            buttons.Add(Content.Load<Texture2D>("Action/panelButtonYellow1"));
             buttons.Add(Content.Load<Texture2D>("Action/panelButtonMoney"));
             buttons.Add(Content.Load<Texture2D>("Action/button"));
             smallFont = Content.Load<SpriteFont>("Action/numberFont");
-            actionScene = new ActionScene(this, actionBackgroundTexture, playersList, cardList, panelTexture, buttons,
-                smallFont);
+            actionScene = new ActionScene(this, actionBackgroundTexture, buildingsCards, charactersCards, panelTexture,
+                buttons, smallFont);
             Components.Add(actionScene);
 
+            #endregion
+
+            #region Load Menu
 
             smallFont = Content.Load<SpriteFont>("Menu/modeMenuSmall");
             largeFont = Content.Load<SpriteFont>("Menu/modeMenuLarge");
@@ -116,12 +175,14 @@ namespace WindowsGame6
             startBackGround = Content.Load<Texture2D>("Menu/MenuBackGround");
             startScene = new StartScene(this, startBackGround, smallFont, largeFont);
             Components.Add(startScene);
+
+            #endregion
+
             activeScene = startScene;
         }
 
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
         protected override void Update(GameTime gameTime)
@@ -136,35 +197,15 @@ namespace WindowsGame6
             {
                 if (MouseClick)
                 {
-                    switch (gameModeScene.GetMenuSelectedIndex())
+                    int selectedIndex = gameModeScene.GetMenuSelectedIndex();
+                    selectedIndex += 2;
+                    if (selectedIndex > 1)
                     {
-                        case 0:
+                        actionScene.NewGame(selectedIndex);
 
-                            break;
-                        case 1:
-
-                            break;
-                        case 2:
-
-                            break;
-                        case 3:
-
-                            break;
-                        case 4:
-
-                            break;
-                        case 5:
-
-                            break;
-                        case 6:
-
-                            break;
-                        case 7:
-
-                            break;
+                        activeScene.Hide();
+                        activeScene = actionScene;
                     }
-                    activeScene.Hide();
-                    activeScene = actionScene;
                 }
             }
             if (activeScene == startScene)

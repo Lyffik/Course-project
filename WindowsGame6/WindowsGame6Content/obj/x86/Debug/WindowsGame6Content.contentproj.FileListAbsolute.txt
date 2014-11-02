@@ -1,1 +1,2 @@
 D:\Учеба\КУРСАЧ\CitadelesGame.v.0.1\WindowsGame6\WindowsGame6\WindowsGame6Content\obj\x86\Debug\WindowsGame6Content.contentprojResolveAssemblyReference.cache
+D:\Учеба\3 курс\1 сем\REPOSIT\Course-project\WindowsGame6\WindowsGame6Content\obj\x86\Debug\WindowsGame6Content.contentprojResolveAssemblyReference.cache
