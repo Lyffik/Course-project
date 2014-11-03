@@ -73,8 +73,44 @@ namespace WindowsGame6
 
             #endregion
 
-            #region Load Cards Characters
+            #region Load Scene of Action
 
+            actionBackgroundTexture = Content.Load<Texture2D>("Action/GameTable2");
+            var buttons = new List<Texture2D>();
+            var panelTexture = Content.Load<Texture2D>("Action/panel");
+            buttons.Add(Content.Load<Texture2D>("Action/panelButtonRed"));
+            buttons.Add(Content.Load<Texture2D>("Action/panelButtonGreen"));
+            buttons.Add(Content.Load<Texture2D>("Action/panelButtonBlue2"));
+            buttons.Add(Content.Load<Texture2D>("Action/panelButtonYellow1"));
+            buttons.Add(Content.Load<Texture2D>("Action/panelButtonMoney"));
+            buttons.Add(Content.Load<Texture2D>("Action/button"));
+            smallFont = Content.Load<SpriteFont>("Action/numberFont");
+            actionScene = new ActionScene(this, actionBackgroundTexture, panelTexture, buttons, smallFont);
+            Components.Add(actionScene);
+
+            #endregion
+
+            #region Load Menu
+
+            smallFont = Content.Load<SpriteFont>("Menu/modeMenuSmall");
+            largeFont = Content.Load<SpriteFont>("Menu/modeMenuLarge");
+            gameModeBackground = Content.Load<Texture2D>("Menu/MenuBackGround");
+            gameModeScene = new GameModeScene(this, gameModeBackground, smallFont, largeFont);
+            Components.Add(gameModeScene);
+
+            smallFont = Content.Load<SpriteFont>("Menu/menuSmall");
+            largeFont = Content.Load<SpriteFont>("Menu/menuLarge");
+            startBackGround = Content.Load<Texture2D>("Menu/MenuBackGround");
+            startScene = new StartScene(this, startBackGround, smallFont, largeFont);
+            Components.Add(startScene);
+
+            #endregion
+
+            activeScene = startScene;
+        }
+
+        public List<Character> LoadCharactersCards()
+        {
             var charactersCards = new List<Character>();
             string[] text = File.ReadAllLines("Content\\Character\\Characters.txt", Encoding.UTF8);
             for (int i = 0; i < text.Length; i++)
@@ -117,11 +153,12 @@ namespace WindowsGame6
                     }
                 }
             }
+            return charactersCards;
+        }
 
-            #endregion
-
-            #region Load Cards Buildings
-
+        public List<Building> LoadBuildingsCards()
+        {
+            string[] text;
             var buildingsCards = new List<Building>();
             text = File.ReadAllLines("Content\\Buildings\\BuildingsCard.txt", Encoding.UTF8);
             foreach (string s in text)
@@ -141,44 +178,7 @@ namespace WindowsGame6
                     }
                 }
             }
-
-            #endregion
-
-            #region Load Scene of Action
-
-            actionBackgroundTexture = Content.Load<Texture2D>("Action/GameTable2");
-            var buttons = new List<Texture2D>();
-            var panelTexture = Content.Load<Texture2D>("Action/panel");
-            buttons.Add(Content.Load<Texture2D>("Action/panelButtonRed"));
-            buttons.Add(Content.Load<Texture2D>("Action/panelButtonGreen"));
-            buttons.Add(Content.Load<Texture2D>("Action/panelButtonBlue2"));
-            buttons.Add(Content.Load<Texture2D>("Action/panelButtonYellow1"));
-            buttons.Add(Content.Load<Texture2D>("Action/panelButtonMoney"));
-            buttons.Add(Content.Load<Texture2D>("Action/button"));
-            smallFont = Content.Load<SpriteFont>("Action/numberFont");
-            actionScene = new ActionScene(this, actionBackgroundTexture, buildingsCards, charactersCards, panelTexture,
-                buttons, smallFont);
-            Components.Add(actionScene);
-
-            #endregion
-
-            #region Load Menu
-
-            smallFont = Content.Load<SpriteFont>("Menu/modeMenuSmall");
-            largeFont = Content.Load<SpriteFont>("Menu/modeMenuLarge");
-            gameModeBackground = Content.Load<Texture2D>("Menu/MenuBackGround");
-            gameModeScene = new GameModeScene(this, gameModeBackground, smallFont, largeFont);
-            Components.Add(gameModeScene);
-
-            smallFont = Content.Load<SpriteFont>("Menu/menuSmall");
-            largeFont = Content.Load<SpriteFont>("Menu/menuLarge");
-            startBackGround = Content.Load<Texture2D>("Menu/MenuBackGround");
-            startScene = new StartScene(this, startBackGround, smallFont, largeFont);
-            Components.Add(startScene);
-
-            #endregion
-
-            activeScene = startScene;
+            return buildingsCards;
         }
 
         protected override void UnloadContent()

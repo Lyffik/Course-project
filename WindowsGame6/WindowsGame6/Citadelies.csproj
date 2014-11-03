@@ -76,6 +76,7 @@
     <Compile Include="gamePlay\CharactersDeck.cs" />
     <Compile Include="gamePlay\Deck.cs" />
     <Compile Include="gamePlay\DeckOfCards.cs" />
+    <Compile Include="gamePlay\GameController.cs" />
     <Compile Include="gamePlay\Player.cs" />
     <Compile Include="Scenes\ActionScene.cs" />
     <Compile Include="core\CardsViewer.cs" />

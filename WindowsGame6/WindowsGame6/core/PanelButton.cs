@@ -46,6 +46,31 @@ namespace WindowsGame6.core
             get { return panelHeight; }
         }
 
+        public int Money
+        {
+            set { buttons[4].Count = value; }
+        }
+
+        public int RedBuildingsCount
+        {
+            set { buttons[0].Count = value; }
+        }
+
+        public int GreenBuildingsCount
+        {
+            set { buttons[1].Count = value; }
+        }
+
+        public int BlueBuildingsCount
+        {
+            set { buttons[2].Count = value; }
+        }
+
+        public int YellowBuildingsCount
+        {
+            set { buttons[3].Count = value; }
+        }
+
         public virtual void SetParams(int width, int height, List<Texture2D> btnTextures)
         {
             panelWidth = width;
@@ -68,6 +93,32 @@ namespace WindowsGame6.core
                 buttons.Add(button);
             }
             viewСonstructedBuildings = buttons[buttons.Count - 1];
+            CalculateBounds();
+        }
+
+        private void CalculateBounds()
+        {
+            float dx = 0;
+            foreach (Button button in buttons)
+            {
+                dx += button.Width;
+            }
+            dx = (panelWidth - dx - panelWidth/6)/(buttons.Count + 1);
+            float x = position.X + panelWidth/8;
+
+            foreach (Button button in buttons)
+            {
+                float y = position.Y + (panelHeight - button.Height)/2;
+                button.position = new Vector2(x, y);
+                button.TextPosition = new Vector2(
+                    (int) (button.position.X + (button.Width - spriteFont.MeasureString(button.Text).X)/2),
+                    (int) (button.position.Y + (button.Height - spriteFont.MeasureString(button.Text).Y)/2));
+                if (button == buttons[4])
+                {
+                    button.TextPosition.Y += button.Height/6;
+                }
+                x += dx + button.Width;
+            }
         }
 
         public bool IsBuildingsButtonClick(Vector2 vector)
@@ -85,23 +136,7 @@ namespace WindowsGame6.core
             bool MouseClick = (mouseState.LeftButton == ButtonState.Released &&
                                oldMouseState.LeftButton == ButtonState.Pressed);
 
-            float dx = 0;
-            foreach (Button button in buttons)
-            {
-                dx += button.Width;
-            }
-            dx = (panelWidth - dx - panelWidth/6)/(buttons.Count + 1);
-            float x = position.X + panelWidth/8;
 
-            foreach (Button button in buttons)
-            {
-                float y = position.Y + (panelHeight - button.Height)/2;
-                button.position = new Vector2(x, y);
-                button.TextPosition = new Vector2(
-                    (int) (button.position.X + (button.Width - spriteFont.MeasureString(button.Text).X)/2),
-                    (int) (button.position.Y + (button.Height - spriteFont.MeasureString(button.Text).Y)/2));
-                x += dx + button.Width;
-            }
             oldMouseState = mouseState;
             base.Update(gameTime);
         }
@@ -118,7 +153,6 @@ namespace WindowsGame6.core
                 switch (i)
                 {
                     case 4:
-                        button.TextPosition.Y += button.Height/6;
                         button.Draw(spriteBatch, Button.DrawMode.Text, spriteFont);
                         break;
                     case 5:
@@ -142,7 +176,6 @@ namespace WindowsGame6.core
                 Default
             }
 
-            public readonly int count;
             public readonly Texture2D texture;
             public int Height;
             public Vector2 TextPosition;
@@ -152,12 +185,13 @@ namespace WindowsGame6.core
             public Button(Texture2D btnTexture)
             {
                 texture = btnTexture;
-                count = 9;
             }
+
+            public int Count { get; set; }
 
             public string Text
             {
-                get { return count.ToString(); }
+                get { return Count.ToString(); }
             }
 
             public bool IsOverButton(Vector2 vector)
@@ -178,7 +212,7 @@ namespace WindowsGame6.core
                         spriteBatch.Begin();
                         spriteBatch.Draw(texture, new Rectangle((int) position.X, (int) position.Y, Width, Height),
                             Color.White);
-                        spriteBatch.DrawString(font, Text, TextPosition, Color.Black);
+                        spriteBatch.DrawString(font, Text, TextPosition, Color.LemonChiffon);
                         spriteBatch.End();
                         break;
                     default:

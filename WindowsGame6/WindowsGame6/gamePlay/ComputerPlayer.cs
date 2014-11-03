@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using WindowsGame6.core;
+using WindowsGame6.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -7,6 +8,11 @@ namespace WindowsGame6.gamePlay
 {
     public class ComputerPlayer : GameScene
     {
+        public delegate void HeroAbility(ComputerPlayer currentPlayer, ComputerPlayer targetPlayer);
+
+        public HeroAbility Ability;
+
+        protected ActionScene actionScene;
         protected List<Building> cardsOnHands;
         protected Character character;
         protected List<Building> constructedВuildings;
@@ -15,8 +21,10 @@ namespace WindowsGame6.gamePlay
         protected MouseState oldMouseState;
         protected PanelButton panelButton;
 
-        public ComputerPlayer(Game game, string name, PanelButton panel) : base(game)
+        public ComputerPlayer(Game game, ActionScene action, string name, PanelButton panel)
+            : base(game)
         {
+            Components.Clear();
             cardsOnHands = new List<Building>();
             constructedВuildings = new List<Building>();
             Name = name;
@@ -28,8 +36,16 @@ namespace WindowsGame6.gamePlay
                 1.75f);
             constructedВuildingsViewer.Hide();
             Components.Add(constructedВuildingsViewer);
-            oldMouseState = Mouse.GetState();
             Show();
+            oldMouseState = Mouse.GetState();
+            actionScene = action;
+        }
+
+        public bool CharacterIsSelect { get; set; }
+
+        public int Rank
+        {
+            get { return character.Rank; }
         }
 
         public Character Character
@@ -51,6 +67,16 @@ namespace WindowsGame6.gamePlay
         {
             get { return money; }
             set { money = value; }
+        }
+
+        public bool IsKilled { get; set; }
+        public bool IsRobbed { get; set; }
+
+        public event HeroAbility StartTurn;
+
+        public void OnStartTurn(ComputerPlayer currentPlayer, ComputerPlayer targetPlayer)
+        {
+            StartTurn(currentPlayer, targetPlayer);
         }
 
         public void SetCharacter(Character newCharacter)
@@ -90,12 +116,32 @@ namespace WindowsGame6.gamePlay
             {
                 constructedВuildingsViewer.SetCards(Card.BuildingsToCards(cardsOnHands));
                 //ToDo Заменить на constructedВuildings
+                actionScene.Pause();
+                Enabled = true;
                 ShowCardsBuildings();
             }
             else
             {
+                actionScene.Continiue();
                 HideCardsBuildings();
             }
+        }
+
+        public virtual void SelectCharacter(CharactersDeck deck)
+        {
+            character = (Character) deck.GetCard();
+            Ability = character.Ability;
+            character.Mode = Card.DrawMode.Shirt;
+
+            character.Visible = true;
+            character.Enabled = true;
+            character.Height = 180;
+            character.IsSelected = false;
+            character.Width = (int) (character.Height*character.RatioWidthToHeight);
+            character.Position = panelButton.Position +
+                                 new Vector2(((panelButton.Width - character.Width)/2), panelButton.Height + 10);
+            actionScene.Components.Insert(1, character);
+            CharacterIsSelect = true;
         }
 
         public override void Update(GameTime gameTime)
@@ -111,6 +157,7 @@ namespace WindowsGame6.gamePlay
                 }
             }
             oldMouseState = mouseState;
+            FillPanelButtons();
             base.Update(gameTime);
         }
 
@@ -119,6 +166,36 @@ namespace WindowsGame6.gamePlay
             base.Draw(gameTime);
         }
 
+        private void FillPanelButtons()
+        {
+            int blue = 0;
+            int red = 0;
+            int yellow = 0;
+            int green = 0;
+            foreach (Building card in cardsOnHands) //TODO заменить на constructedBuildings
+            {
+                switch (card.Class)
+                {
+                    case Card.GameClass.Blue:
+                        blue++;
+                        break;
+                    case Card.GameClass.Green:
+                        green++;
+                        break;
+                    case Card.GameClass.Red:
+                        red++;
+                        break;
+                    case Card.GameClass.Yellow:
+                        yellow++;
+                        break;
+                }
+            }
+            panelButton.GreenBuildingsCount = green;
+            panelButton.BlueBuildingsCount = blue;
+            panelButton.RedBuildingsCount = red;
+            panelButton.YellowBuildingsCount = yellow;
+            panelButton.Money = money;
+        }
 
         public void ShowCardsBuildings()
         {

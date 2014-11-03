@@ -6,11 +6,11 @@ namespace WindowsGame6.gamePlay.Characters
     public class Thief : Character
     {
         public Thief(Game game, Texture2D front, Texture2D shirt, string cardName, int cardRank, GameClass gameClass)
-            : base(game,front, shirt, cardName, cardRank, gameClass)
+            : base(game, front, shirt, cardName, cardRank, gameClass)
         {
         }
 
-        public override void Ability()
+        public override void Ability(ComputerPlayer currPlayer, ComputerPlayer targetPlayer)
         {
         }
     }

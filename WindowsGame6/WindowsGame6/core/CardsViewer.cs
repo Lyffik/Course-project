@@ -20,10 +20,16 @@ namespace WindowsGame6.core
 
         public CardsViewer(Game game) : base(game)
         {
+            Components.Clear();
             spriteBatch = (SpriteBatch) Game.Services.GetService(typeof (SpriteBatch));
             Enabled = true;
             Visible = true;
             cards = new List<Card>();
+        }
+
+        public Vector2 DeckPosition
+        {
+            get { return deckPosition; }
         }
 
         public Vector2 Position
@@ -109,6 +115,7 @@ namespace WindowsGame6.core
             CalculateCardsBounds();
             foreach (Card card in cards)
             {
+                card.MaxScale = maxScale;
                 if (!Components.Contains(card))
                 {
                     Components.Add(card);
@@ -157,7 +164,7 @@ namespace WindowsGame6.core
                 if (!cards[result].IsSelected)
                 {
                     cards[result].IsSelected = true;
-                    if (selectedIndex != -1)
+                    if (selectedIndex != -1 && selectedIndex < cards.Count)
                     {
                         cards[selectedIndex].IsSelected = false;
                     }
@@ -165,7 +172,7 @@ namespace WindowsGame6.core
             }
             else
             {
-                if (selectedIndex != -1)
+                if (selectedIndex != -1 && selectedIndex < cards.Count)
                 {
                     cards[selectedIndex].IsSelected = false;
                 }
@@ -203,7 +210,7 @@ namespace WindowsGame6.core
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            if (selectedIndex != -1)
+            if (selectedIndex != -1 && selectedIndex < cards.Count)
             {
                 cards[selectedIndex].Draw(gameTime);
             }

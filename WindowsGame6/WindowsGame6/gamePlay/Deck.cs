@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using WindowsGame6.core;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace WindowsGame6.gamePlay
 {
@@ -15,30 +16,21 @@ namespace WindowsGame6.gamePlay
         {
             cardsViewer = new CardsViewer(game);
             Components.Add(cardsViewer);
-            
         }
 
         public bool ShowDeck { get; set; }
 
-        public void DiscardOpenly()
+        public Card ReturnSelectedCard(MouseState mouseState)
         {
-            Card card = GetCard();
-            cards.Remove(card);
-            cardsViewer.SetCards(cards);
-            card.Mode = Card.DrawMode.Shirt;
-            card.Position = cardsViewer.Position + new Vector2(0, card.Height + 10);
-        }
-
-        public void DiscardClosed(int count)
-        {
-            for (int i = 0; i < count; i++)
+            foreach (Card card in cards)
             {
-                Card card = GetCard();
-                cards.Remove(card);
-                cardsViewer.SetCards(cards);
-                card.Mode = Card.DrawMode.Front;
-                card.Position = cardsViewer.Position + new Vector2(0, card.Height + 10);
+                if (card.IsOverCard(new Vector2(mouseState.X, mouseState.Y)))
+                {
+                    cards.Remove(card);
+                    return card;
+                }
             }
+            return null;
         }
 
         public void Open()
